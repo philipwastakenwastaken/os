@@ -10,7 +10,7 @@ mkdir /nix
 # export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 dnf5 install -y npm yarn
 # npm config set prefix /usr/node
-yarn global add --prefix /usr/local @angular/cli @angular/language-service typescript @angular/language-server
+yarn global add --prefix /usr/yarn @angular/cli @angular/language-service typescript @angular/language-server
 
 dnf5 -y copr enable yalter/niri-git
 
