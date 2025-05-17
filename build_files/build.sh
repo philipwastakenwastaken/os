@@ -60,7 +60,7 @@ dotnet tool install -g csharpier
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
 cargo binstall --root /usr sd rpg-cli eza zellij
-cargo binstall --root /usr --git https://github.com/sxyazi/yazi yazi
+cargo install --root /usr --git https://github.com/sxyazi/yazi
 
 # Git
 dnf5 install -y gh meld
