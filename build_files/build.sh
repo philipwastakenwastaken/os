@@ -4,6 +4,11 @@ set -ouex pipefail
 
 mkdir /nix
 
+# Node
+mkdir /usr/local
+dnf5 install -y npm
+npm install -g @angular/cli @angular/language-service typescript @angular/language-server
+
 dnf5 -y copr enable yalter/niri-git
 
 # Rust
@@ -37,10 +42,6 @@ rm -rf helix
 # prettier
 # angular
 # typo-ls
-
-# Node
-dnf5 install -y npm
-npm install -g @angular/cli @angular/language-service typescript @angular/language-server
 
 # Desktop
 dnf5 install -y niri rio wl-clipboard
