@@ -6,8 +6,8 @@ mkdir /nix
 
 # Node
 mkdir /usr/node
-npm config set prefix /usr/node
 dnf5 install -y npm
+npm config set prefix /usr/node
 npm install -g @angular/cli @angular/language-service typescript @angular/language-server
 
 dnf5 -y copr enable yalter/niri-git
