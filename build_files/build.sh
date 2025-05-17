@@ -5,7 +5,8 @@ set -ouex pipefail
 mkdir /nix
 
 # Node
-mkdir /usr/local
+mkdir /usr/node
+npm config set prefix /usr/node
 dnf5 install -y npm
 npm install -g @angular/cli @angular/language-service typescript @angular/language-server
 
