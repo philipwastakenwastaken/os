@@ -6,8 +6,10 @@ mkdir /nix
 
 # Node
 mkdir /usr/node
+export NPM_CONFIG_PREFIX=/usr/node/
+export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 dnf5 install -y npm
-npm config set prefix /usr/node
+# npm config set prefix /usr/node
 npm install -g @angular/cli @angular/language-service typescript @angular/language-server
 
 dnf5 -y copr enable yalter/niri-git
