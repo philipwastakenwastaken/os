@@ -38,6 +38,10 @@ rm -rf helix
 # angular
 # typo-ls
 
+# Node
+dnf5 install -y npm
+npm install -g @angular/cli @angular/language-service typescript @angular/language-server
+
 # Desktop
 dnf5 install -y niri rio wl-clipboard
 dnf5 install -y xcb-util-cursor-devel clang
@@ -68,8 +72,5 @@ dnf5 install -y gh meld
 # cargo install --root /usr --git https://github.com/jj-vcs/jj jj-cli
 cargo binstall --root /usr lazyjj 
 cargo binstall --strategies crate-meta-data jj-cli
-
-# Node
-dnf5 install -y npm
 
 systemctl enable podman.socket
