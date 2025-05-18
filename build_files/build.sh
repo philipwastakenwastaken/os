@@ -47,6 +47,8 @@ cargo install --root /usr --git https://github.com/sofusa/qobuz-player
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 
+DOTNET_CLI_HOME=/usr/lib/dotnet
+mkdir -p "$DOTNET_CLI_HOME"
 dotnet tool install --tool-path /usr/bin csharpier
 # TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 # wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
