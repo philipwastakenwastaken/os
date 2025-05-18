@@ -7,30 +7,29 @@ mkdir /nix
 # Node
 #mkdir /usr/node
 mkdir -p $(realpath /root)
-export NPM_CONFIG_PREFIX=/usr/node/
-mkdir $NPM_CONFIG_PREFIX
-export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+# export NPM_CONFIG_PREFIX=/usr/node/
+# export NPM_CONFIG_PREFIX=/usr
+# mkdir $NPM_CONFIG_PREFIX
+# export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
 dnf5 install -y npm
 #npm config set prefix $NPM_CONFIG_PREFIX
-npm install -g @angular/cli @angular/language-service typescript @angular/language-server
-
-dnf5 -y copr enable yalter/niri-git
+npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
 
 # Rust
 dnf5 install -y cargo
 
-export CARGO_HOME=/tmp/cargo
-export PATH="$CARGO_HOME/bin:$PATH"
+# export CARGO_HOME=/tmp/cargo
+# export PATH="$CARGO_HOME/bin:$PATH"
 
-mkdir -p "$CARGO_HOME"
+# mkdir -p "$CARGO_HOME"
 
 # Cargo binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
 # Helix
 dnf5 install -y clang
-export HELIX_DEFAULT_RUNTIME=/usr/lib/helix/runtime
-mkdir -p "$HELIX_DEFAULT_RUNTIME"
+# export HELIX_DEFAULT_RUNTIME=/usr/lib/helix/runtime
+# mkdir -p "$HELIX_DEFAULT_RUNTIME"
 git clone -b pull-diagnostics https://github.com/SofusA/helix-pull-diagnostics.git
 cd helix-pull-diagnostics
 cargo build --profile opt --locked
@@ -49,34 +48,33 @@ rm -rf helix
 # typo-ls
 
 # Desktop
-dnf5 install -y niri rio wl-clipboard
-dnf5 install -y xcb-util-cursor-devel clang
+dnf5 -y copr enable yalter/niri-git
+dnf5 install -y niri wl-clipboard
+dnf5 install -y xcb-util-cursor-devel clang # xwayland-satellite dependencies
 cargo install --root /usr --git https://github.com/Supreeeme/xwayland-satellite
 
 # Qobuz player
-dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel
+dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
 cargo install --root /usr --git https://github.com/sofusa/qobuz-player
 
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 
-export DOTNET_CLI_HOME=/usr/dotnet
-export PATH="$DOTNET_CLI_HOME/bin:$PATH"
-mkdir -p "$DOTNET_CLI_HOME"
-dotnet tool install -g csharpier
+# export DOTNET_CLI_HOME=/usr/dotnet
+# export PATH="$DOTNET_CLI_HOME/bin:$PATH"
+# mkdir -p "$DOTNET_CLI_HOME"
+dotnet tool install --tool-path /usr csharpier
 # TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 # wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
 
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
 cargo binstall --root /usr sd rpg-cli eza zellij
-# cargo install --root /usr --git https://github.com/sxyazi/yazi yazi-cli
-cargo binstall --strategies crate-meta-data yazi-cli
+cargo binstall --strategies crate-meta-data --root /usr yazi-cli
 
 # Git
 dnf5 install -y gh meld
-# cargo install --root /usr --git https://github.com/jj-vcs/jj jj-cli
 cargo binstall --root /usr lazyjj 
-cargo binstall --strategies crate-meta-data jj-cli
+cargo binstall --root /usr --strategies crate-meta-data jj-cli
 
 systemctl enable podman.socket
