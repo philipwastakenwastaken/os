@@ -6,13 +6,14 @@ mkdir /nix
 
 # Node
 mkdir /usr/node
+mkdir -p $(realpath /root)
 export NPM_CONFIG_PREFIX=/usr/node/
 export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
-dnf5 install -y npm pnpm
-# npm config set prefix /usr/node
-pnpm config set pnpm-prefix /usr/node
+dnf5 install -y npm
+npm config set prefix /usr/node
+#pnpm config set pnpm-prefix /usr/node
 mkdir -p /usr/local/bin
-pnpm add -g @angular/cli @angular/language-service typescript @angular/language-server
+npm install -g @angular/cli @angular/language-service typescript @angular/language-server
 
 dnf5 -y copr enable yalter/niri-git
 
