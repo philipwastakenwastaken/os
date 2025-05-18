@@ -5,12 +5,12 @@ set -ouex pipefail
 mkdir /nix
 
 # Node
-# mkdir /usr/node
-# export NPM_CONFIG_PREFIX=/usr/node/
-# export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
-dnf5 install -y npm yarn
+mkdir /usr/node
+export NPM_CONFIG_PREFIX=/usr/node/
+export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
+dnf5 install -y npm
 # npm config set prefix /usr/node
-yarn global add @angular/cli @angular/language-service typescript @angular/language-server --prefix /usr/yarn 
+npm install -g @angular/cli @angular/language-service typescript @angular/language-server
 
 dnf5 -y copr enable yalter/niri-git
 
