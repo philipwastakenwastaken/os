@@ -43,6 +43,7 @@ curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.
 #PSHOME=/usr/lib/powershell
 #mkdir -p "$PSHOME"
 mkdir -p /opt/microsoft/powershell/7/
+mkdir -p /usr/local/share/man/man1/
 dnf5 install -y powershell
 
 # Node
