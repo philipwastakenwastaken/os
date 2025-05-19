@@ -4,6 +4,7 @@ set -ouex pipefail
 
 mkdir /nix
 mkdir -p $(realpath /root)
+mkdir -p $(realpath /opt)
 
 # Rust
 dnf5 install -y cargo
@@ -14,18 +15,6 @@ mkdir -p "$CARGO_HOME"
 # Cargo binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
-# Helix
-dnf5 install -y clang
-export HELIX_DEFAULT_RUNTIME=/usr/lib/helix/runtime
-mkdir -p "$HELIX_DEFAULT_RUNTIME"
-git clone -b pull-diagnostics https://github.com/SofusA/helix-pull-diagnostics.git
-cd helix-pull-diagnostics
-cargo build --profile opt --locked
-cp -r runtime /usr/lib/helix/
-cp target/opt/hx /usr/bin/hx
-cd ..
-rm -rf helix
-
 # TODO: Language servers
 # tailwind
 # typescript
@@ -34,16 +23,6 @@ rm -rf helix
 # prettier
 # angular
 # typo-ls
-
-# Desktop
-dnf5 -y copr enable yalter/niri-git
-dnf5 install -y niri wl-clipboard
-dnf5 install -y xcb-util-cursor-devel clang # xwayland-satellite dependencies
-cargo install --root /usr --git https://github.com/Supreeeme/xwayland-satellite
-
-# Qobuz player
-dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
-cargo install --root /usr --git https://github.com/sofusa/qobuz-player
 
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
@@ -66,6 +45,10 @@ curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.
 mkdir -p /opt/microsoft/powershell/7/
 dnf5 install -y powershell
 
+# Node
+dnf5 install -y npm
+npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
+
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
 cargo install --root /usr --git https://github.com/facundoolano/rpg-cli
@@ -77,8 +60,26 @@ dnf5 install -y gh meld
 cargo binstall --root /usr lazyjj 
 cargo binstall --root /usr --strategies crate-meta-data jj-cli
 
-# Node
-dnf5 install -y npm
-npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
+# Helix
+dnf5 install -y clang
+export HELIX_DEFAULT_RUNTIME=/usr/lib/helix/runtime
+mkdir -p "$HELIX_DEFAULT_RUNTIME"
+git clone -b pull-diagnostics https://github.com/SofusA/helix-pull-diagnostics.git
+cd helix-pull-diagnostics
+cargo build --profile opt --locked
+cp -r runtime /usr/lib/helix/
+cp target/opt/hx /usr/bin/hx
+cd ..
+rm -rf helix
+
+# Desktop
+dnf5 -y copr enable yalter/niri-git
+dnf5 install -y niri wl-clipboard
+dnf5 install -y xcb-util-cursor-devel clang # xwayland-satellite dependencies
+cargo install --root /usr --git https://github.com/Supreeeme/xwayland-satellite
+
+# Qobuz player
+dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
+cargo install --root /usr --git https://github.com/sofusa/qobuz-player
 
 systemctl enable podman.socket
