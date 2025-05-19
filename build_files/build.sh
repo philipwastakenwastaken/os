@@ -57,7 +57,7 @@ dotnet tool install --tool-path /usr/bin csharpier
 
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
-cargo binstall --root /usr --strategies crate-meta-data --git https://github.com/facundoolano/rpg-cli rpg-cli
+cargo install --root /usr --git https://github.com/facundoolano/rpg-cli
 cargo binstall --root /usr sd eza zellij
 cargo binstall --strategies crate-meta-data --root /usr yazi-cli
 
