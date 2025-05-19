@@ -54,11 +54,16 @@ dotnet tool install --tool-path /usr/bin csharpier
 # TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 # wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
 
-# vscode pwsh
+# vscode
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+dnf5 install -y code
+
+# powershell
 curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
-dnf5 install -y code powershell
+PSHOME=/usr/lib/powershell
+mkdir -p "$PSHOME"
+dnf5 install -y powershell
 
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
