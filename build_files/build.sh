@@ -5,6 +5,7 @@ set -ouex pipefail
 mkdir /nix
 mkdir -p $(realpath /root)
 mkdir -p $(realpath /opt)
+mkdir -p $(realpath /usr/local)
 
 # Rust
 dnf5 install -y cargo
@@ -14,15 +15,6 @@ mkdir -p "$CARGO_HOME"
 
 # Cargo binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-
-# TODO: Language servers
-# tailwind
-# typescript
-# typescript lsp?
-# eslint
-# prettier
-# angular
-# typo-ls
 
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
@@ -49,6 +41,10 @@ dnf5 install -y powershell
 # Node
 dnf5 install -y npm
 npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
+
+# Language servers
+npm install -g --prefix prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
+cargo binstall --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
 
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
