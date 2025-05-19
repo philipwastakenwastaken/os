@@ -5,13 +5,6 @@ set -ouex pipefail
 mkdir /nix
 mkdir -p $(realpath /root)
 
-# vscode
-rpm --import https://packages.microsoft.com/keys/microsoft.asc
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-#dnf5 check-update
-dnf5 install code
-
-
 # Rust
 dnf5 install -y cargo
 
@@ -60,6 +53,12 @@ mkdir -p "$DOTNET_CLI_HOME"
 dotnet tool install --tool-path /usr/bin csharpier
 # TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 # wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
+
+# vscode
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+#dnf5 check-update
+dnf5 install -y code
 
 # Shell
 dnf5 install -y zoxide atuin fd-find ripgrep
