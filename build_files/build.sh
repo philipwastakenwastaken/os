@@ -4,6 +4,8 @@ set -ouex pipefail
 
 mkdir /nix
 
+mkdir -p $(realpath /root)
+
 # Rust
 dnf5 install -y cargo
 
@@ -49,7 +51,7 @@ dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 
 DOTNET_CLI_HOME=/usr/lib/dotnet
 mkdir -p "$DOTNET_CLI_HOME"
-dotnet tool install --tool-path /usr csharpier
+dotnet tool install --tool-path /usr/bin csharpier
 # TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 # wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
 
@@ -65,9 +67,7 @@ cargo binstall --root /usr lazyjj
 cargo binstall --root /usr --strategies crate-meta-data jj-cli
 
 # Node
-mkdir -p $(realpath /root)
 dnf5 install -y npm
-#npm config set prefix $NPM_CONFIG_PREFIX
 npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
 
 systemctl enable podman.socket
