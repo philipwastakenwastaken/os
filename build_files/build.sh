@@ -7,7 +7,7 @@ mkdir -p $(realpath /root)
 mkdir -p $(realpath /opt)
 mkdir -p $(realpath /usr/local)
 
-rpm enable che/nerd-fonts
+dnf5 -y copr enable che/nerd-fonts
 dnf5 install -y nerd-fonts
 
 # Rust
