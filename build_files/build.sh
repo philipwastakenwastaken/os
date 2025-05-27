@@ -8,7 +8,7 @@ mkdir -p $(realpath /opt)
 mkdir -p $(realpath /usr/local)
 
 # rio
-dnf5 install https://github.com/raphamorim/rio/releases/download/v0.2.16/rioterm-0.2.16-1.x86_64_wayland.rpm
+dnf5 install -y https://github.com/raphamorim/rio/releases/download/v0.2.16/rioterm-0.2.16-1.x86_64_wayland.rpm
 
 # Rust
 dnf5 install -y cargo
