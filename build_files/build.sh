@@ -19,6 +19,9 @@ mkdir -p "$CARGO_HOME"
 # Cargo binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
+# csharp
+cargo install --root /usr --git https://github.com/SofusA/csharp-language-server
+
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 
@@ -35,8 +38,6 @@ dnf5 install -y code
 
 # powershell
 curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
-#PSHOME=/usr/lib/powershell
-#mkdir -p "$PSHOME"
 mkdir -p /opt/microsoft/powershell/7/
 mkdir -p /usr/local/share/man/man1/
 dnf5 install -y powershell
