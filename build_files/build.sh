@@ -31,7 +31,7 @@ dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 DOTNET_CLI_HOME=/usr/lib/dotnet
 mkdir -p "$DOTNET_CLI_HOME"
 dotnet tool install --tool-path /usr/bin csharpier
-npm install -g --prefix azure-functions-core-tools
+npm install -g --prefix /usr azure-functions-core-tools
 # TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
 
@@ -47,7 +47,7 @@ mkdir -p /usr/local/share/man/man1/
 dnf5 install -y powershell
 
 # Language servers
-npm install -g --prefix prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
+npm install -g --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
 npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
 cargo binstall --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
 
