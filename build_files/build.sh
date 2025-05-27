@@ -7,8 +7,8 @@ mkdir -p $(realpath /root)
 mkdir -p $(realpath /opt)
 mkdir -p $(realpath /usr/local)
 
-# rio
-dnf5 install -y https://github.com/raphamorim/rio/releases/download/v0.2.16/rioterm-0.2.16-1.x86_64_wayland.rpm
+rpm enable che/nerd-fonts
+dnf5 install -y nerd-fonts
 
 # Rust
 dnf5 install -y cargo
