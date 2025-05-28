@@ -15,7 +15,7 @@ dnf5 install -y nerd-fonts
 dnf5 install -y npm
 
 # Rust
-dnf5 install -y cargo
+dnf5 install -y cargo rust-analyzer rustfmt
 
 export CARGO_HOME=/tmp/cargo
 mkdir -p "$CARGO_HOME"
