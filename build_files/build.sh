@@ -7,8 +7,13 @@ mkdir -p $(realpath /root)
 mkdir -p $(realpath /opt)
 mkdir -p $(realpath /usr/local)
 
+# Fonts
 dnf5 -y copr enable che/nerd-fonts
 dnf5 install -y nerd-fonts
+
+# Git
+dnf5 -y copr enable vdanielmo/git-credential-manager
+dnf5 install -y git-credential-manager
 
 # Node
 dnf5 install -y npm
