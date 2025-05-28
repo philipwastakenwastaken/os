@@ -11,10 +11,6 @@ mkdir -p $(realpath /usr/local)
 dnf5 -y copr enable che/nerd-fonts
 dnf5 install -y nerd-fonts
 
-# Git
-dnf5 -y copr enable vdanielmo/git-credential-manager
-dnf5 install -y git-credential-manager
-
 # Node
 dnf5 install -y npm
 
@@ -63,6 +59,9 @@ cargo binstall --root /usr sd eza zellij
 cargo binstall --strategies crate-meta-data --root /usr yazi-cli
 
 # Git
+dnf5 -y copr enable vdanielmo/git-credential-manager
+dnf5 install -y git-credential-manager
+
 dnf5 install -y gh meld
 cargo binstall --root /usr lazyjj 
 cargo binstall --root /usr --strategies crate-meta-data jj-cli
@@ -82,8 +81,8 @@ rm -rf helix
 # Desktop
 dnf5 -y copr enable yalter/niri-git
 dnf5 install -y niri wl-clipboard
-dnf5 install -y xcb-util-cursor-devel clang # xwayland-satellite dependencies
-cargo install --root /usr --git https://github.com/Supreeeme/xwayland-satellite
+#dnf5 install -y xcb-util-cursor-devel clang # xwayland-satellite dependencies
+#cargo install --root /usr --git https://github.com/Supreeeme/xwayland-satellite
 
 # Qobuz player
 dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
