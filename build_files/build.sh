@@ -101,4 +101,7 @@ tar -xf qobuz-player-x86_64-unknown-linux-gnu.tar.gz
 mv qobuz-player /usr/bin
 rm qobuz-player-x86_64-unknown-linux-gnu.tar.gz
 
+# Playwright dependencies
+dnf5 install -yq libjpeg-turbo libwebp libffi libicu
+
 systemctl enable podman.socket
