@@ -1,7 +1,9 @@
+ARG POSTFIX=''
+
 FROM scratch AS ctx
 COPY build_files /
 
-FROM ghcr.io/ublue-os/bluefin:stable
+FROM ghcr.io/ublue-os/bluefin${POSTFIX}:stable
 # FROM ghcr.io/ublue-os/bluefin-nvidia:stable
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \

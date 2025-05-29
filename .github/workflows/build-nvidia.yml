@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: "${{ github.event.repository.name }}"  
+  IMAGE_NAME: "${{ github.event.repository.name }}-nvidia"  
   IMAGE_DESC: "My Customized Universal Blue Image"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"
 
@@ -78,7 +78,7 @@ jobs:
           containerfiles: |
             ./Containerfile
           image: ${{ env.IMAGE_NAME }}
-          build-args: POSTFIX=''
+          build-args: POSTFIX='-nvidia'
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           oci: false
