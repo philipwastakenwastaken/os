@@ -24,9 +24,6 @@ mkdir -p "$CARGO_HOME"
 # Cargo binstall
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
-# csharp
-cargo binstall --root /usr --git https://github.com/SofusA/csharp-language-server csharp-language-server
-
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 
@@ -35,6 +32,9 @@ mkdir -p "$DOTNET_CLI_HOME"
 dotnet tool install --tool-path /usr/bin csharpier
 npm install -g --prefix /usr azure-functions-core-tools
 wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
+ 
+# csharp
+cargo install --root /usr --git https://github.com/SofusA/csharp-language-server
 
 # vscode
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -84,7 +84,7 @@ rm -rf helix
 # Desktop
 dnf5 -y copr enable yalter/niri-git
 dnf5 install -y niri wl-clipboard
-# TODO: ironbar
+cargo binstall --root /usr ironbar
 
 # Qobuz player
 dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
