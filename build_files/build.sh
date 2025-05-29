@@ -58,6 +58,7 @@ ln -s /usr/lib/powershell/7/pwsh /usr/bin/pwsh
 npm i -gq --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
 npm i -gq --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
 cargo binstall -yq --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
+cargo binstall -yq --root /usr leptosfmt
 #TODO: Bicep lang server
 
 # Shell
