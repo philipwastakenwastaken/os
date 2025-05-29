@@ -9,14 +9,14 @@ mkdir -p $(realpath /usr/local)
 
 # Fonts
 dnf5 -y copr enable che/nerd-fonts
-dnf5 install -y nerd-fonts
+dnf5 install -yq nerd-fonts
 
 # Node
-dnf5 install -y npm
+dnf5 install -yq npm
 npm config --global set prefix "/usr"
 
 # Rust
-dnf5 install -y cargo rust-analyzer rustfmt clippy
+dnf5 install -yq cargo rust-analyzer rustfmt clippy
 
 export CARGO_HOME=/tmp/cargo
 mkdir -p "$CARGO_HOME"
@@ -25,7 +25,7 @@ mkdir -p "$CARGO_HOME"
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
 # Dotnet
-dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
+dnf5 install -yq dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 
 DOTNET_CLI_HOME=/usr/lib/dotnet
 mkdir -p "$DOTNET_CLI_HOME"
@@ -34,12 +34,16 @@ npm install -g --prefix /usr azure-functions-core-tools
 wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
  
 # csharp
-cargo install --root /usr --git https://github.com/SofusA/csharp-language-server
+# cargo install --root /usr --git https://github.com/SofusA/csharp-language-server
+wget https://github.com/SofusA/csharp-language-server/releases/latest/download/csharp-language-server-x86_64-unknown-linux-gnu.zip
+unzip csharp-language-server-x86_64-unknown-linux-gnu.zip
+mv csharp-language-server /usr/bin
+rm csharp-language-server-x86_64-unknown-linux-gnu.zip 
 
 # vscode
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-dnf5 install -y code
+dnf5 install -yq code
 
 # powershell
 # TODO: pwsh has broken symlink to /opt
@@ -47,7 +51,7 @@ curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.
 mkdir -p /opt/microsoft/powershell/7/
 mkdir -p /usr/local/share/man/man1/
 ls /opt/microsoft/powershell/7
-dnf5 install -y powershell
+dnf5 install -yq powershell
 
 # Language servers
 npm install -g --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
@@ -56,21 +60,24 @@ cargo binstall --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
 #TODO: Bicep lang server
 
 # Shell
-dnf5 install -y zoxide atuin fd-find ripgrep skim
-cargo install --root /usr --git https://github.com/facundoolano/rpg-cli
+dnf5 install -yq zoxide atuin fd-find ripgrep skim
 cargo binstall --root /usr sd eza zellij
 cargo binstall --strategies crate-meta-data --root /usr yazi-cli
+# cargo install --root /usr --git https://github.com/facundoolano/rpg-cli
+wget https://github.com/facundoolano/rpg-cli/releases/download/1.2.0/rpg-cli-1.2.0-linux
+chmod +x rpg-cli-1.2.0-linux
+mv rpg-cli-1.2.0-linux /usr/bin/rpg-cli
 
 # Git
 dnf5 -y copr enable vdanielmo/git-credential-manager
-dnf5 install -y git-credential-manager
+dnf5 install -yq git-credential-manager
 
-dnf5 install -y gh meld
+dnf5 install -yq gh meld
 cargo binstall --root /usr lazyjj 
 cargo binstall --root /usr --strategies crate-meta-data jj-cli
 
 # Helix
-dnf5 install -y clang
+dnf5 install -yq clang
 export HELIX_DEFAULT_RUNTIME=/usr/lib/helix/runtime
 mkdir -p "$HELIX_DEFAULT_RUNTIME"
 git clone -b pull-diagnostics https://github.com/SofusA/helix-pull-diagnostics.git
@@ -83,11 +90,15 @@ rm -rf helix
 
 # Desktop
 dnf5 -y copr enable yalter/niri-git
-dnf5 install -y niri wl-clipboard
+dnf5 install -yq niri wl-clipboard
 cargo binstall --root /usr ironbar
 
 # Qobuz player
-dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
-cargo install --root /usr --git https://github.com/sofusa/qobuz-player
+dnf5 install -yq rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
+# cargo install --root /usr --git https://github.com/sofusa/qobuz-player
+wget https://github.com/SofusA/qobuz-player/releases/latest/download/qobuz-player-x86_64-unknown-linux-gnu.tar.gz
+tar -xf qobuz-player-x86_64-unknown-linux-gnu.tar.gz
+mv qobuz-player /usr/bin
+rm qobuz-player-x86_64-unknown-linux-gnu.tar.gz
 
 systemctl enable podman.socket
