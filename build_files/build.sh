@@ -46,12 +46,13 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 dnf5 install -yq code
 
 # powershell
-# TODO: pwsh has broken symlink to /opt
 curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
 mkdir -p /opt/microsoft/powershell/7/
 mkdir -p /usr/local/share/man/man1/
 dnf5 install -yq powershell
-ls /opt/microsoft/powershell/7
+rm /usr/bin/pwsh
+mv /opt/microsoft/powershell /usr/lib
+ln -s /usr/lib/powershell/7/pwsh /usr/bin/pwsh
 
 # Language servers
 npm i -gq --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
@@ -91,7 +92,6 @@ rm -rf helix
 # Desktop
 dnf5 -y copr enable yalter/niri-git
 dnf5 install -yq niri wl-clipboard
-cargo binstall -yq --root /usr ironbar
 
 # Qobuz player
 dnf5 install -yq rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
