@@ -16,7 +16,7 @@ dnf5 install -y npm
 npm config --global set prefix "/usr"
 
 # Rust
-dnf5 install -y cargo rust-analyzer rustfmt
+dnf5 install -y cargo rust-analyzer rustfmt clippy
 
 export CARGO_HOME=/tmp/cargo
 mkdir -p "$CARGO_HOME"
