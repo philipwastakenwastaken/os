@@ -46,6 +46,7 @@ dnf5 install -y code
 curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
 mkdir -p /opt/microsoft/powershell/7/
 mkdir -p /usr/local/share/man/man1/
+ls /opt/microsoft/powershell/7
 dnf5 install -y powershell
 
 # Language servers
