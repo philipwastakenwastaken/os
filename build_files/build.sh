@@ -13,6 +13,7 @@ dnf5 install -y nerd-fonts
 
 # Node
 dnf5 install -y npm
+npm config --global set prefix "/usr"
 
 # Rust
 dnf5 install -y cargo rust-analyzer rustfmt
@@ -33,7 +34,6 @@ DOTNET_CLI_HOME=/usr/lib/dotnet
 mkdir -p "$DOTNET_CLI_HOME"
 dotnet tool install --tool-path /usr/bin csharpier
 npm install -g --prefix /usr azure-functions-core-tools
-# TODO: azure core functions bicep-langserver powershell Azure Artifacts Credential Provider
 wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
 
 # vscode
@@ -42,6 +42,7 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 dnf5 install -y code
 
 # powershell
+# TODO: pwsh has broken symlink to /opt
 curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
 mkdir -p /opt/microsoft/powershell/7/
 mkdir -p /usr/local/share/man/man1/
@@ -51,9 +52,10 @@ dnf5 install -y powershell
 npm install -g --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
 npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
 cargo binstall --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
+#TODO: Bicep lang server
 
 # Shell
-dnf5 install -y zoxide atuin fd-find ripgrep
+dnf5 install -y zoxide atuin fd-find ripgrep skim
 cargo install --root /usr --git https://github.com/facundoolano/rpg-cli
 cargo binstall --root /usr sd eza zellij
 cargo binstall --strategies crate-meta-data --root /usr yazi-cli
@@ -81,8 +83,7 @@ rm -rf helix
 # Desktop
 dnf5 -y copr enable yalter/niri-git
 dnf5 install -y niri wl-clipboard
-#dnf5 install -y xcb-util-cursor-devel clang # xwayland-satellite dependencies
-#cargo install --root /usr --git https://github.com/Supreeeme/xwayland-satellite
+# TODO: ironbar
 
 # Qobuz player
 dnf5 install -y rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
