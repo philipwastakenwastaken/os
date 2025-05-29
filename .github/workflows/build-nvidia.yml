@@ -78,7 +78,7 @@ jobs:
           containerfiles: |
             ./Containerfile
           image: ${{ env.IMAGE_NAME }}
-          build-args: POSTFIX='-nvidia'
+          build-args: POSTFIX=-nvidia
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           oci: false
