@@ -30,7 +30,7 @@ dnf5 install -yq dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
 DOTNET_CLI_HOME=/usr/lib/dotnet
 mkdir -p "$DOTNET_CLI_HOME"
 dotnet tool install --tool-path /usr/bin csharpier
-npm install -g --prefix /usr azure-functions-core-tools
+npm i -gq --prefix /usr azure-functions-core-tools
 wget -qO- https://aka.ms/install-artifacts-credprovider.sh | bash
  
 # csharp
@@ -50,19 +50,19 @@ dnf5 install -yq code
 curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
 mkdir -p /opt/microsoft/powershell/7/
 mkdir -p /usr/local/share/man/man1/
-ls /opt/microsoft/powershell/7
 dnf5 install -yq powershell
+ls /opt/microsoft/powershell/7
 
 # Language servers
-npm install -g --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
-npm install -g --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
-cargo binstall --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
+npm i -gq --prefix /usr prettier @tailwindcss/language-server vscode-langservers-extracted typescript-language-server typescript
+npm i -gq --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
+cargo binstall -yq --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
 #TODO: Bicep lang server
 
 # Shell
 dnf5 install -yq zoxide atuin fd-find ripgrep skim
-cargo binstall --root /usr sd eza zellij
-cargo binstall --strategies crate-meta-data --root /usr yazi-cli
+cargo binstall -yq --root /usr sd eza zellij
+cargo binstall -yq --strategies crate-meta-data --root /usr yazi-cli
 # cargo install --root /usr --git https://github.com/facundoolano/rpg-cli
 wget https://github.com/facundoolano/rpg-cli/releases/download/1.2.0/rpg-cli-1.2.0-linux
 chmod +x rpg-cli-1.2.0-linux
@@ -73,8 +73,8 @@ dnf5 -y copr enable vdanielmo/git-credential-manager
 dnf5 install -yq git-credential-manager
 
 dnf5 install -yq gh meld
-cargo binstall --root /usr lazyjj 
-cargo binstall --root /usr --strategies crate-meta-data jj-cli
+cargo binstall -yq --root /usr lazyjj 
+cargo binstall -yq --root /usr --strategies crate-meta-data jj-cli
 
 # Helix
 dnf5 install -yq clang
@@ -91,7 +91,7 @@ rm -rf helix
 # Desktop
 dnf5 -y copr enable yalter/niri-git
 dnf5 install -yq niri wl-clipboard
-cargo binstall --root /usr ironbar
+cargo binstall -yq --root /usr ironbar
 
 # Qobuz player
 dnf5 install -yq rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
