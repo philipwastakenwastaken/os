@@ -25,7 +25,7 @@ mkdir -p "$CARGO_HOME"
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
 # csharp
-cargo install --root /usr --git https://github.com/SofusA/csharp-language-server
+cargo binstall --root /usr --git https://github.com/SofusA/csharp-language-server
 
 # Dotnet
 dnf5 install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0 azure-cli
