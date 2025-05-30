@@ -59,7 +59,13 @@ npm i -gq --prefix /usr prettier @tailwindcss/language-server vscode-langservers
 npm i -gq --prefix /usr @angular/cli @angular/language-service typescript @angular/language-server
 cargo binstall -yq --root /usr --git https://github.com/tekumara/typos-lsp typos-lsp
 cargo binstall -yq --root /usr leptosfmt
-#TODO: Bicep lang server
+
+## Bicep language server
+wget https://github.com/Azure/bicep/releases/latest/download/bicep-langserver.zip
+unzip bicep-langserver.zip -d /usr/lib/bicep-langserver
+echo -e "#!/usr/bin/env bash\nexec dotnet /usr/lib/bicep-langserver/Bicep.LangServer.dll" > /usr/bin/bicep-langserver
+chmod +x /usr/bin/bicep-langserver
+rm bicep-langserver.zip
 
 # Shell
 dnf5 install -yq zoxide atuin fd-find ripgrep skim
