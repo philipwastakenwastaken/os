@@ -2,7 +2,6 @@
 
 set -ouex pipefail
 
-mkdir /nix
 mkdir -p $(realpath /root)
 mkdir -p $(realpath /opt)
 mkdir -p $(realpath /usr/local)
@@ -98,7 +97,7 @@ rm -rf helix
 
 # Desktop
 dnf5 -y copr enable yalter/niri-git
-dnf5 install -yq niri wl-clipboard
+dnf5 install -yq niri wl-clipboard swayidle
 
 # Qobuz player
 dnf5 install -yq rust-glib-sys-devel rust-gstreamer-devel # Qobuz player dependencies
