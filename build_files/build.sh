@@ -106,6 +106,12 @@ wget https://github.com/SofusA/qobuz-player/releases/latest/download/qobuz-playe
 tar -xf qobuz-player-x86_64-unknown-linux-gnu.tar.gz
 mv qobuz-player /usr/bin
 rm qobuz-player-x86_64-unknown-linux-gnu.tar.gz
+ 
+# color-scheme
+wget https://github.com/SofusA/color-scheme/releases/latest/download/color-scheme-x86_64-unknown-linux-gnu.zip
+unzip color-scheme-x86_64-unknown-linux-gnu.zip
+mv color-scheme /usr/bin
+rm color-scheme-x86_64-unknown-linux-gnu.zip
 
 # Playwright dependencies
 dnf5 install -yq libjpeg-turbo libwebp libffi libicu
