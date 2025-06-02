@@ -112,8 +112,19 @@ wget https://github.com/SofusA/color-scheme/releases/latest/download/color-schem
 unzip color-scheme-x86_64-unknown-linux-gnu.zip
 mv color-scheme /usr/bin
 rm color-scheme-x86_64-unknown-linux-gnu.zip
+ 
+# cli-dungeon
+wget https://github.com/SofusA/cli-dungeon/releases/latest/download/cli-dungeon-x86_64-unknown-linux-gnu.zip
+unzip cli-dungeon-x86_64-unknown-linux-gnu.zip
+mv cli-dungeon /usr/bin
+rm cli-dungeon-x86_64-unknown-linux-gnu.zip
 
 # Playwright dependencies
 dnf5 install -yq libjpeg-turbo libwebp libffi libicu
+
+# Remove rust and install rustup instead
+dnf5 remove -yq cargo rust-analyzer rustfmt clippy
+dnf5 install -yq rustup
+dnf5 -y autoremove
 
 systemctl enable podman.socket
