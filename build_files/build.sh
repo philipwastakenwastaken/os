@@ -3,9 +3,12 @@
 set -ouex pipefail
 
 dnf5 -y install \
+    ImageMagick \
+    fontawesome-6-free-fonts \
     fuzzel \
     mako \
     niri \
+    swaybg \
     swaylock \
     waybar
 
