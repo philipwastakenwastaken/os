@@ -3,8 +3,10 @@
 set -ouex pipefail
 
 dnf5 -y install \
+    fuzzel \
     mako \
     niri \
+    swaylock \
     waybar
 
 curl -fsSL "https://copr.fedorainfracloud.org/coprs/scottames/ghostty/repo/fedora-$(rpm -E %fedora)/scottames-ghostty-fedora-$(rpm -E %fedora).repo" \
